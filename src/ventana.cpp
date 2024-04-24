@@ -1,6 +1,6 @@
 #include <GL/glut.h>
 #include "ventana.h"
-#ifdef VENTANA
+
 int estado =0;
 
 void blink() {
@@ -25,4 +25,3 @@ void initGlut(int argc, char **argv) {
     glutCreateWindow("Blink");
     glutDisplayFunc(blink);
 }
-#endif

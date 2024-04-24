@@ -2,34 +2,21 @@
 #include <cstdio>
 #include "config.h"
 #include <chrono>
+#include "clase-later.cpp"
+#include "ventana.h"
 
-#ifdef VENTANA
-  #include "ventana.h"
-#else
-bool estado = 0;
-
-void blink() {
-    printf("%d",estado);
-    estado = !estado;
+void interrupcion1(void)
+{
+    blink();
 }
-#endif
 
 int main(int argc, char **argv) {
-#ifdef VENTANA
   initGlut(argc, argv);
-#endif
-  using namespace std::chrono;
-  time_point antes = high_resolution_clock::now();
- 
   setbuf(stdout, NULL);
-  for(;1;) {
-    time_point ahora   = high_resolution_clock::now();
-    auto mseconds = duration_cast<milliseconds>(ahora - antes).count();
-    if (mseconds > 1000) {
-      	blink();
-        antes = ahora;
-    }
 
-    printf("hola");
+  later later_int1(1000, false, &interrupcion1);
+ 
+  for(;1;) {
+    printf("hola.");
   }
 }
