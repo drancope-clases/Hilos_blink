@@ -1,28 +1,49 @@
-#include <GL/glut.h>
 #include "ventana.h"
-#ifdef VENTANA
-int estado =0;
+#include <glm/glm.hpp>
 
-void blink() {
-    if (estado==0) {
-	    glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	    glClearColor(0.1,.8,0.11,0);
-	    glutSwapBuffers();
-        estado = 1;
-    } else {
-    	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    	glClearColor(0.1,0.1,0.1,0);
-    	glutSwapBuffers();
-        estado = 0;
-    }
+using namespace glm;
+
+int initVentanas() {
+	if( !glfwInit() ) {
+		fprintf( stderr, "Failed to initialize GLFW\n" );
+		getchar();
+		return -1;
+	}
+
+	glfwWindowHint(GLFW_SAMPLES, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+    return 0;
 }
 
-void initGlut(int argc, char **argv) {
-    glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
-    glutInitWindowSize(100, 80);
-    glutInitWindowPosition(100, 100);
-    glutCreateWindow("Blink");
-    glutDisplayFunc(blink);
+GLFWwindow* creaVentana(/*int px, int py*/){
+	GLFWwindow *window = glfwCreateWindow( 224, 168, "LED", NULL, NULL);
+	if( window == NULL ) {
+		fprintf( stderr, "Fallo al abrir ventana GLFW.\n" );
+		getchar();
+		glfwTerminate();
+		return NULL;
+	}
+	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+	glfwMakeContextCurrent(window);
+    return window;
 }
-#endif
+bool estado= false;
+void blink(/*bool estado, GLFWwindow* window*/) {
+  printf("entra en blink\n");
+  if (estado) {
+	glClearColor(0.0, 0.8, 0.4, 0.0);
+	glClear( GL_COLOR_BUFFER_BIT );
+	glfwSwapBuffers(window);
+	glfwPollEvents();
+  } else {
+	glClearColor(0.0, 0.0, 0.4, 0.0);
+	glClear( GL_COLOR_BUFFER_BIT );
+	glfwSwapBuffers(window);
+	glfwPollEvents();
+  }
+  estado = !estado;
+}
