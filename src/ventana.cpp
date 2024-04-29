@@ -19,22 +19,23 @@ int initVentanas() {
     return 0;
 }
 
-GLFWwindow* creaVentana(/*int px, int py*/){
+GLFWwindow* creaVentana(int px, int py){
 	GLFWwindow *window = glfwCreateWindow( 224, 168, "LED", NULL, NULL);
+	glfwSetWindowPos(window, px, py);
 	if( window == NULL ) {
 		fprintf( stderr, "Fallo al abrir ventana GLFW.\n" );
 		getchar();
 		glfwTerminate();
 		return NULL;
 	}
-	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 	glfwMakeContextCurrent(window);
+	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
     return window;
 }
 bool estado= false;
-void blink(/*bool estado, GLFWwindow* window*/) {
+void blink(bool *estado, GLFWwindow* window) {
   printf("entra en blink\n");
-  if (estado) {
+  if (*estado) {
 	glClearColor(0.0, 0.8, 0.4, 0.0);
 	glClear( GL_COLOR_BUFFER_BIT );
 	glfwSwapBuffers(window);
@@ -45,5 +46,5 @@ void blink(/*bool estado, GLFWwindow* window*/) {
 	glfwSwapBuffers(window);
 	glfwPollEvents();
   }
-  estado = !estado;
+  *estado = !*estado;
 }

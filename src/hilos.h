@@ -4,12 +4,12 @@
 #include <thread>
 #include <chrono>
 #include <GL/glx.h>
-
-/*class Timer {
+/*
+class Timer {
     bool clear = false;
 
 public:
-    GLFWwindow* window;
+    GLFWwindow* ventana;
     bool estado;
     template<typename Function>
     void setInterval(Function function, int interval);

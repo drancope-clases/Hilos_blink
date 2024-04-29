@@ -8,8 +8,8 @@
 #include <chrono>
 #include <GL/glx.h>
 
-#define MANTENER_ABIERTO ( glfwGetKey(t1.window, GLFW_KEY_ESCAPE ) != GLFW_PRESS && glfwWindowShouldClose(t1.window) == 0 )
+#define MANTENER_ABIERTO ( glfwGetKey(t1.ventana, GLFW_KEY_ESCAPE ) != GLFW_PRESS && glfwWindowShouldClose(t1.ventana) == 0 )
 
-void blink(bool estado, GLFWwindow* window);
+void blink(bool *estado, GLFWwindow* ventana);
 int initVentanas();
-GLFWwindow* creaVentana();
+GLFWwindow* creaVentana(int px, int py);

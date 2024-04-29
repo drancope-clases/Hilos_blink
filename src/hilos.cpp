@@ -3,7 +3,7 @@ class Timer {
     bool clear = false;
 
 public:
-    GLFWwindow* window;
+    GLFWwindow* ventana;
     bool estado = false;
     template<typename Function>
     void setInterval(Function function, int interval) {
@@ -15,8 +15,8 @@ public:
                 std::this_thread::sleep_for(std::chrono::milliseconds(interval));
                 if(this->clear) return;
                 std::cout << "Entrando en hilo\n" << std::endl;
-                glfwMakeContextCurrent(this->window);
-                function(/*this->estado, this->window*/);
+                glfwMakeContextCurrent(this->ventana);
+                function(&(this->estado), this->ventana);
             }
         });
         t.detach();
@@ -29,7 +29,7 @@ public:
             if(this->clear) return;
             std::this_thread::sleep_for(std::chrono::milliseconds(delay));
             if(this->clear) return;
-            glfwMakeContextCurrent(this->window);
+            glfwMakeContextCurrent(this->ventana);
             function();
         });
         t.detach();
