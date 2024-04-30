@@ -4,7 +4,7 @@
 
 int main(int argc, char **argv) {
   setbuf(stdout, NULL);
-  Timer t1 = Timer();
+  Timer t1;
   Timer t2;
   initVentanas();
   t1.ventana = creaVentana(50, 50);
