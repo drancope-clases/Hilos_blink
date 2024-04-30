@@ -32,7 +32,7 @@ GLFWwindow* creaVentana(int px, int py){
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
     return window;
 }
-bool estado= false;
+
 void blink(bool *estado, GLFWwindow* window) {
   printf("entra en blink\n");
   if (*estado) {
