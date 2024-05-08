@@ -4,14 +4,6 @@
 #include <chrono>
 #include "clase.h"
 
-void interrupcion1(Led *t)
-{
-    //glfwMakeContextCurrent(t->ventana);
-    blink(&(t->estado), t->ventana);
-    //glfwSwapBuffers(t->ventana);
-    //glfwPollEvents();
-}
-
 int main(int argc, char **argv) {
   initGlfw();
   setbuf(stdout, NULL);
