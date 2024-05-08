@@ -1,7 +1,7 @@
 #include "ventana.h"
-#include <glm/glm.hpp>
+//#include <glm/glm.hpp>
 
-using namespace glm;
+//using namespace glm;
 
 int initVentanas() {
 	if( !glfwInit() ) {
